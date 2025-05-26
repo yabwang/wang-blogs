@@ -3,26 +3,40 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch: # 允许手动触发
 
 jobs:
   deploy:
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 获取完整提交历史
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci # 使用精确依赖安装
 
       - name: Build site
         run: npm run docs:build
 
-      - name: Deploy to GitHub Pages
+      - name: Validate output
+        run: ls -R docs/.vitepress/dist # 验证构建产物
+
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .vitepress/dist
+          publish_dir: docs/.vitepress/dist
+          keep_files: false
+          force_orphan: true # 强制清理历史提交
