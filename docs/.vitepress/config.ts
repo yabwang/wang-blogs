@@ -28,6 +28,12 @@ export default defineConfig({
           { text: '动态规划', link: '/algorithms/dp' },
         ],
       },
+      {
+        text: 'NLP',
+        items: [
+          { text: 'NLP', link: '/nlp/cosine' },
+        ],
+      }
     ],
 
   },
