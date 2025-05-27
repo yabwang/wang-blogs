@@ -10,26 +10,25 @@ export default defineConfig({
     nav: [
       { text: 'Example', link: '/example' },
 
-      // {
-      //   text: 'Dropdown Menu',
-      //   items: [
-      //     { text: 'Item A', link: '/item-1' },
-      //     { text: 'Item B', link: '/item-2' },
-      //     { text: 'Item C', link: '/item-3' },
-      //   ],
-      // },
+      {
+        text: '算法题库',
+        items: [
+          { text: '数组专题', link: '/algorithms/array' },
+          { text: '动态规划', link: '/algorithms/dp' },
+        ],
+      },
 
-      // ...
     ],
 
     sidebar: [
       {
-        // text: 'Guide',
+        text: '算法题库',
         items: [
-          { text: 'Example', link: '/example' },
-          // ...
+          { text: '数组专题', link: '/algorithms/array' },
+          { text: '动态规划', link: '/algorithms/dp' },
         ],
       },
     ],
+
   },
 });
