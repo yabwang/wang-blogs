@@ -2,14 +2,21 @@
 layout: home
 
 hero:
-  name: VitePress
-  text: Vite & Vue powered static site generator.
-  tagline: Simple, powerful, and performant. Meet the modern SSG framework you've always wanted.
+  name: 技术探索者
+  text: 记录与分享技术成长之路
+  tagline: 高可用架构 | 分布式系统 | 云原生解决方案
   actions:
     - theme: brand
       text: Get Started
       link: /example
-    - theme: alt
-      text: View on GitHub
-      link: https://github.com/vuejs/vitepress
 ---
+
+<style>
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #1a237e 20%, #0d47a1);
+  --vp-button-brand-bg: #1565c0;
+  --vp-c-brand-dark: #0d47a1;
+  --vp-c-brand-darker: #1a237e;
+}
+</style>
