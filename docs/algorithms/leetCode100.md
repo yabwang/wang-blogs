@@ -1,6 +1,6 @@
-[[toc]]
+## [128.最长连续序列](https://leetcode.cn/problems/longest-consecutive-sequence/description/?envType=study-plan-v2&envId=top-100-liked)
 
-## 128.最长连续序列
+```plain
 给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
 请你设计并实现时间复杂度为 O(n) 的算法解决此问题。
 
@@ -30,9 +30,7 @@
   因此，外层循环碰到上述情况需要跳过。
   即需要枚举的数x一定是不能在数组中存在前驱数x-1，若存在则跳过外层循环
 
-::: details 点我查看代码
-```java
-class Solution {
+  class Solution {
     public int longestConsecutive(int[] nums) {
         Set<Integer> sets = new HashSet<>();
         for (int num : nums) {
@@ -57,16 +55,16 @@ class Solution {
     }
 }
 ```
-:::
 
+## [49. 字母异位词分组](https://leetcode.cn/problems/group-anagrams/)
 
-
-## 49. 字母异位词分组
-给你一个字符串数组，请你将 **字母异位词** 组合在一起。可以按任意顺序返回结果列表。
-**字母异位词**  是由重新排列源单词的所有字母得到的一个新单词。
+```plain
+给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。
+字母异位词 是由重新排列源单词的所有字母得到的一个新单词。
 
  
 示例 1:
+
 输入: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 输出: [["bat"],["nat","tan"],["ate","eat","tea"]]
 
@@ -77,13 +75,14 @@ class Solution {
 Map<String, List<String>> map = new HashMap<>();
 
 //查找已有值
-```java
 List<String> list = map.getOrDefault(key, new ArrayList<String>());
 list.add(str);//新增当前值
 map.put(key, list);
 ```
 
-## 283. 移动零
+## [<font style="color:rgb(10, 132, 255);">283. 移动零</font>](https://leetcode.cn/problems/move-zeroes/)
+
+```plain
 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
 请注意 ，必须在不复制数组的情况下原地对数组进行操作。
 
@@ -97,11 +96,13 @@ map.put(key, list);
 3、第二次遍历，从j开始到结束的位置，将这部分位置置为0
 
 //第一次遍历的时候，j指针记录非0的个数，只要是非0的统统都赋给nums[j]
-```java
-int j = 0;
-for(int i=0;i<nums.length;++i) {
-    if(nums[i]!=0) {
-        nums[j++] = nums[i];
-    }
-}
+		int j = 0;
+		for(int i=0;i<nums.length;++i) {
+			if(nums[i]!=0) {
+				nums[j++] = nums[i];
+			}
+		}
 ```
+
+
+
