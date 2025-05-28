@@ -22,7 +22,7 @@ export default defineConfig({
         {
           text: 'java 基础',
           items: [
-            { text: 'java 基础', link: '/java/java' },
+            // { text: 'java 基础', link: '/java/' },
           ],
         }
 
@@ -33,8 +33,9 @@ export default defineConfig({
           text: '算法题库',
           collapsed: true,   // 默认折叠
           items: [
-            { text: '数组专题', link: '/algorithms/array/' },
-            { text: '动态规划', link: '/algorithms/dp/' }
+            { text: '动态规划', link: '/algorithms/dp/' },
+            { text: '链表', link: '/algorithms/linkedList/' },
+            // { text: 'LeetCode hot 100', link: '/algorithms/leetCode100/' },
           ]
         },
         {
