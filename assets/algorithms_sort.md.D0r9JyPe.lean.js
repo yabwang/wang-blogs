@@ -1,0 +1,1 @@
+import{_ as t,c as e,o as a}from"./chunks/framework.DvccZNqS.js";const l=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"algorithms/sort.md","filePath":"algorithms/sort.md","lastUpdated":1748627756000}'),r={name:"algorithms/sort.md"};function o(s,c,n,i,d,m){return a(),e("div")}const _=t(r,[["render",o]]);export{l as __pageData,_ as default};
