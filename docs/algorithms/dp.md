@@ -89,26 +89,6 @@ class Solution {
         return dp[text1.length()][text2.length()];
     }
 }
-
-### [5. 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
-```python
-def longestPalindrome(s: str) -> str:
-    n = len(s)
-    dp = [[False]*n for _ in range(n)]
-    res = ''
-    for l in range(n):
-        for i in range(n-l):
-            j = i + l
-            if l == 0:
-                dp[i][j] = True
-            elif l == 1:
-                dp[i][j] = (s[i] == s[j])
-            else:
-                dp[i][j] = (s[i] == s[j] and dp[i+1][j-1])
-            
-            if dp[i][j] and l+1 > len(res):
-                res = s[i:j+1]
-    return res
 ```
 
 ### [53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
