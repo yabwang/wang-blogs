@@ -34,8 +34,7 @@ export default defineConfig({
           collapsed: true,   // 默认折叠
           items: [
             { text: '动态规划', link: '/algorithms/dp/' },
-            { text: '链表', link: '/algorithms/linkedList/' },
-            // { text: 'LeetCode hot 100', link: '/algorithms/leetCode100/' },
+            { text: '并查集', link: '/algorithms/unionFind/' },
           ]
         },
         {
