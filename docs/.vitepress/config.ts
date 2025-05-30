@@ -10,42 +10,58 @@ export default defineConfig({
 
   themeConfig: {
 
+
       nav: [
-
         {
-          text: '算法题库',
+          text: 'LeetCode刷题',
           items: [
-            { text: '数组专题', link: '/algorithms/array' },
-            { text: '动态规划', link: '/algorithms/dp' },
+            { text: 'LeetCode 100题', link: '/algorithms/leetCode100' },
           ],
         },
         {
-          text: 'java 基础',
+          text: '基础知识',
           items: [
-            // { text: 'java 基础', link: '/java/' },
+            { text: '数据库', link: '/basic/mysql' },
           ],
         }
 
       ],
 
-      sidebar: [
-        {
-          text: '算法题库',
-          collapsed: true,   // 默认折叠
-          items: [
-            { text: '动态规划', link: '/algorithms/dp/' },
-            { text: '并查集', link: '/algorithms/unionFind/' },
-          ]
-        },
-        {
-          text: '机器学习',
-          collapsed: true,     // 默认折叠
-          items: [
-            { text: '余弦相似度', link: '/nlp/cosine/' }
-          ]
-        }
-      ],
+      //侧边栏
+      sidebar: {
+        '/algorithms/': [
+          {
+            text: 'LeetCode专题',
+            collapsed: true,
+            items: [
+              { text: 'LeetCode 100题', link: '/algorithms/leetCode100' },
+              { text: '动态规划', link: '/algorithms/dp' },
+              { text: '并查集', link: '/algorithms/unionFind' }
+              // ... existing code ...
+            ]
+          },
+          {
+            text: '其他算法',
+            collapsed: true,
+            items: [
+              { text: '排序算法', link: '/algorithms/sort' },
+              { text: '余弦相似度', link: '/algorithms/cosine' }
+            ]
+          }
+        ],
+        '/basic/': [
+          {
+            text: '数据库',
+            collapsed: true,
+            items: [
+              { text: '事务实现机制', link: '/basic/mysql' }
+            ]
+         }
+        ]
+      },
 
+
+      //update time
       lastUpdated: {
         text: 'Updated at',
         formatOptions: {
@@ -54,6 +70,7 @@ export default defineConfig({
         }
       },
 
+      //页脚
       footer: {
         message: 'Released under the MIT License.',
         copyright: 'Copyright © 2025-present Wang'
