@@ -1,14 +1,14 @@
-<h1 id="uvOM3">1、概述</h1>
+<h2 id="uvOM3">1、概述</h2>
 
 文本分类主要分为几个步骤，分别是文本预处理，特征选择，特征加权，分类模型训练，性能评价。
 
-<h1 id="DgqQL">2、预理阶段</h1>
+<h2 id="DgqQL">2、预理阶段</h2>
 
 要将文本转换成计算机所能识别的内容，去除部分难以识别的冗余信息，需先对文本进行预处理。文本的预处理工作就是对文本内容进行标准化、结构化处理，方便机器后续的识别。
 
 作为文本分类的起始步骤，文本预处理的结果对最终的分类效果产生重要影响。
 
-<h2 id="elY97">2.1 分词</h2>
+<h3 id="elY97">2.1 分词</h3>
 
 英语分词相对简单，通常根据空格，标点符号来切分句子。  
 
@@ -18,19 +18,19 @@
 + Jpostal分词  
 
 
-<h2 id="LvIRp">2.2去停用词</h2>
+<h3 id="LvIRp">2.2去停用词</h3>
 
 去停用词主要目的是去掉一些与分类无关的代词、介词、连词等特征，也包括一些数字、单个的字母或者一些语气助词等。这些词语出现频率极高，通常出现只是语法需要，没有太多语义信息包含在里面，去掉这些停用词不影响文档的意义表示。
 
 停用词是在处理自然语言数据（文本）之前或之后过滤掉的单词。由于 jaccard 索引基于两组中匹配单词的数量，因此这些单词的存在会给我们带来不准确的结果，因此必须在处理之前删除。
 
-<h2 id="OH5pr">2.3 标准化</h2>
+<h3 id="OH5pr">2.3 标准化</h3>
 
 
 
 
-<h1 id="IR4jy">3、相关计算</h1>
-<h2 id="S0Nuk">3.1 Jaccard Index（关键元素重合度）</h2>
+<h2 id="IR4jy">3、相关计算</h2>
+<h3 id="S0Nuk">3.1 Jaccard Index（关键元素重合度）</h3>
 
 Jaccard系数定义为两个集合的交集大小与并集大小的比值。其核心思想是忽略元素顺序与重复性，仅关注元素的共有性。
 
@@ -52,7 +52,7 @@ public double calculateJaccard(Set<String> setA, Set<String> setB) {
 
 
 
-<h2 id="QeBCu">3.2归一化编辑距离（字符级差异）</h2>
+<h3 id="QeBCu">3.2归一化编辑距离（字符级差异）</h3>
 
 两个单词之间的编辑距离是将一个单词更改为另一个单词所需的最小单字符编辑 （插入、删除或替换） 次数。
 
@@ -89,7 +89,7 @@ public int calculateLevenshtein(String s1, String s2) {
 
 
 
-<h2 id="vwlyR">3.3向量余弦相似度（3-gram）</h2>
+<h3 id="vwlyR">3.3向量余弦相似度（3-gram）</h3>
 
 直接操作字符而非词汇，避免分词误差，可以捕捉局部相似性
 
@@ -119,7 +119,7 @@ public int calculateLevenshtein(String s1, String s2) {
 | :--: | :------------------: | :--------------: | :------------------: |
 |  2   |       敏感度高       |  容易受噪声影响  | 短文本、高相似度匹配 |
 |  3   | **平衡敏感度与抗噪** |  **计算量适中**  |  **地址匹配推荐值**  |
-|  4   |       抗噪性强       | 可能漏掉细微变化 | 长文本、稳定格式数据 |
+|  4   |       抗噪强劲       | 可能漏掉细微变化 | 长文本、稳定格式数据 |
 
 
 
@@ -129,7 +129,7 @@ public int calculateLevenshtein(String s1, String s2) {
 无需依赖语言特定的分词规则。
 
 
-
+::: details 实现示例
 ```java
 public static double cosineSimilarity(Map<String, Integer> vec1, Map<String, Integer> vec2) {
     // 计算点积
@@ -160,9 +160,13 @@ public static double cosineSimilarity(Map<String, Integer> vec1, Map<String, Int
     return dotProduct / (norm1 * norm2);
 }
 ```
+:::
 
-<h2 id="yjS8j">3.4 GPT相似度判断</h2>
+<h3 id="yjS8j">3.4 GPT相似度判断</h3>
 
+- 地址结构化
+
+::: details 实现示例
 ```markdown
 # 角色
 你是一个专业的地址识别助手，能够结构化地址，并准确识别和补全地址缩写，且具备多语言处理能力。
@@ -178,28 +182,24 @@ public static double cosineSimilarity(Map<String, Integer> vec1, Map<String, Int
 3. 借助工具进行地址验证与信息补充，确保结构化的准确性。
 
 结构化信息的 addressFormat 格式如下：
-```
+{
+  "Country/Region": "<Country Name>",
+  "Province/State/Autonomous_Region": "<Province/State Name>",
+  "City/County": "<City/County Name>",
+  "Street_Address": "<Street Address Details>",
+  "PostalCode": "<Postal Code>",
+  "House/Apartment_Number": "<Door Number>",
+  "Store/Branch_Name": "<Store Name/Other Details>",
+  "Mile_Marker": "<Mile Marker Details>"
+}
 
- addressFormat：
- {
-
-- Country/Region: <Country Name>
-- Province/State/Autonomous_Region: <Province/State Name>
-- City/County: <City/County Name>
-- Street_Address: <Street Address Details>
-- PostalCode: <Postal Code>
-- House/Apartment_Number: <Door Number>
-- Store/Branch_Name: <Store Name/Other Details>
-- Mile_Marker: <Mile Marker Details>
-  }
-
-``` 
 ## 限制:
 - 只处理与海外租车门店地址识别相关的内容，拒绝回答无关话题。
 - 所输出的内容必须按照给定的 addressFormat 格式进行组织，不能偏离框架要求。
-- 原地址的任何部分都不能丢失，需合理分配到相应字段。  
-```
+- 原地址的任何部分都不能丢失，需合理分配到相应字段。
 
+
+示例：
 示例：99 H Street Ne Union Station
 
 addressFormat：  
@@ -222,9 +222,13 @@ addressFormat：
 + “Union Station”为门店名称。
 + 该地址位于美国华盛顿特区（根据“Union Station, H Street NE, Washington, DC”公共信息补全）。
 + 邮编未提供，设为null。
+```
+:::
 
 
 
+- 地址比较
+::: details 实现示例
 ```markdown
 # 角色
 你是一位专业的海外租车门店地址识别专家，能够精准判断两个海外租车门店地址是否属于同一门店或同一建筑物，且具备多语言处理能力。
@@ -267,7 +271,7 @@ addresFormat：
 ## 限制:
 - 仅处理海外租车门店地址的识别问题，拒绝回答与地址无关无关的话题。
 - 输出内容必须严格按照给定格式进行组织，优先输出“judgment_result”的结果结果（yes/no），不得偏离框架要求。 
-```
+
 
 **示例：**
 
@@ -302,8 +306,10 @@ addressFormat：{
   }
 + judgment_result：yes
 + judgment_basis：两个地址均明确指向“Liberia International Airport”或其正前方，且城市均为Liberia。虽然没有具体门牌号及更多详细结构，但依据机场类门店的地标特性，两地址均指同一机场主入口或周边区域，在缺乏门牌号且机场只有一个主入口的情况下，可判断为同一门店或同一建筑物。
+```
+:::
 
-<h2 id="Wfwf0">3.5 层次聚类</h2>
+<h3 id="Wfwf0">3.5 层次聚类</h3>
 
 [https://zh.wikipedia.org/wiki/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB](https://zh.wikipedia.org/wiki/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB)
 
@@ -314,11 +320,10 @@ addressFormat：{
 + 单链接（Single Link）：以两簇中最近样本距离为簇间距离。
 + 全链接（Complete Link）：以两簇中最远样本距离为簇间距离。
 
-![](https://cdn.nlark.com/yuque/0/2025/png/40952992/1748871171094-04dcdaef-1f27-4756-bbee-07035670d2cf.png?x-oss-process=image/format,png)
 
 
 
-<h1 id="XCAU9">5.数据验证</h1>
+<h2 id="XCAU9">5.数据验证</h2>
 
 + 若业务更关注完整地址格式匹配 → 提高余弦相似度权重
 + 若允许缩写但要求关键词匹配 → 提高Jaccard权重
